@@ -1,14 +1,12 @@
-const http = require("http");
-const express = require("express");
-const app = express();
-app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT);
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 280000);
+const express = require('express');
+const server = express();
+server.all('/', (req, res)=>{
+    res.send('Thanks for pinging me <3')
+})
+
+function keepAlive(){
+    server.listen(3000, ()=>{console.log("Server is Ready!")});
+}
 ////////////////////////////////////////////////////////////////////
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -47,5 +45,5 @@ client.on('message', message => {
   ////////////////////////////////////////////////////////////////////////
   
 });
-
+keepAlive();
 client.login(process.env.TOKEN);
